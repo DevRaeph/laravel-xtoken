@@ -9,20 +9,14 @@
  * ______________________________________________________________________
  * | Author:    DevStorm Solutions - rplan
  * | Project:   ds-laravel-jwttoken-project
- * | File:      HasXToken.php
- * | Created:   05.02.2021
+ * | File:      config.php
+ * | Created:   06.02.2021
  * | Todo:
  * |_____________________________________________________________________
  */
-
-namespace DevRaeph\XToken\Traits;
-
-use DevRaeph\XToken\Http\Model\DXToken;
-
-trait HasXToken
-{
-    public function XTokens()
-    {
-        return $this->morphMany(DXToken::class, 'user');
-    }
-}
+return [
+    //Request Header for Token
+    'tokenKey'      => 'X-DevStorm-Token',
+    'tokenIssuedBy' => env('APP_URL', 'null'),
+    'tokenEncKey'   => env("APP_KEY",'null')
+];

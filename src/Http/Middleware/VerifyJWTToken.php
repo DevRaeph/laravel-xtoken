@@ -15,12 +15,11 @@
  * |_____________________________________________________________________
  */
 
-namespace DevStorm\JWTToken\Http\Middleware;
+namespace DevRaeph\XToken\Http\Middleware;
 use Carbon\CarbonImmutable;
 use Closure;
-use DevStorm\JWTToken\Http\Model\DXToken;
-use DevStorm\JWTToken\Http\Model\JWTToken;
-use DevStorm\Response\Response;
+use DevRaeph\XToken\Http\Model\DXToken;
+use DevRaeph\XToken\Tokenizer;
 use Lcobucci\JWT\Token\Plain;
 use Lcobucci\JWT\Validation\Constraint;
 use Lcobucci\JWT\Validation\RequiredConstraintsViolated;
@@ -30,7 +29,7 @@ class VerifyJWTToken
 {
     public function handle($request, Closure $next)
     {
-        $config = (new JWTToken())->getConfig();
+        $config = (new Tokenizer())->getConfig();
 
         $validator = array(
             new Constraint\SignedWith($config->signer(),$config->signingKey()),
@@ -40,7 +39,7 @@ class VerifyJWTToken
         );
         $config->setValidationConstraints(...$validator);
 
-        $jwtToken = $request->header('X-DevStorm-Token');
+        $jwtToken = $request->header(config('xtoken.tokenKey'));
         if($jwtToken == null || $jwtToken == ""){
             return response([
                 "message"=>"Token wurde nicht mitgegeben"

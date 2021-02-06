@@ -15,26 +15,21 @@
  * |_____________________________________________________________________
  */
 
-namespace DevStorm\JWTToken\Http\Model;
+namespace DevRaeph\XToken;
 
-
-
-use Carbon\Carbon;
-use DevStorm\Response\Response;
 use Illuminate\Http\Request;
 use Lcobucci\JWT\Token\Plain;
 
-class JWTTokenClaim
+class TokenizerClaim
 {
     private $uid;
-    private string $header = "X-DevStorm-Token";
     private Request $request;
 
     /**
      * @param Request $request Der eingehende Request von der API
-     * @return JWTTokenClaim;
+     * @return TokenizerClaim;
      */
-    public function setRequest(Request $request): JWTTokenClaim
+    public function setRequest(Request $request): TokenizerClaim
     {
         $this->request = $request;
         return $this;
@@ -44,9 +39,9 @@ class JWTTokenClaim
      * @return int|null ModelID
      */
     public function get():?int{
-        $config = (new JWTToken())->getConfig();
+        $config = (new Tokenizer)->getConfig();
         try {
-            $jwtToken = $this->request->header($this->header);
+            $jwtToken = $this->request->header(config('xtoken.tokenKey'));
             $token = $config->parser()->parse((string) $jwtToken);
 
             assert($token instanceof Plain);

@@ -1,6 +1,7 @@
 {
     "name": "devraeph/laravel-xtoken",
     "description": "This Package creates a JWTToken for the Application and provides a middelware for Auth",
+    "license": "GNU AGPLv3",
     "authors": [
         {
             "name": "Raphael Planer",
@@ -15,13 +16,17 @@
     "extra": {
         "laravel": {
             "providers": [
-                "DevStorm\\JWTToken\\JWTTokenServiceProvider"
-            ]
+                "DevRaeph\\XToken\\JWTTokenServiceProvider"
+            ],
+            "aliases": {
+                "Tokenizer": "DevRaeph\\XToken\\Facades\\Tokenizer",
+                "TokenizerClaim": "DevRaeph\\XToken\\Facades\\TokenizerClaim"
+            }
         }
     },
     "autoload": {
         "psr-4": {
-            "DevStorm\\JWTToken\\": "src/"
+            "DevRaeph\\XToken\\": "src/"
         }
     }
 }

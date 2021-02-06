@@ -9,20 +9,20 @@
  * ______________________________________________________________________
  * | Author:    DevStorm Solutions - rplan
  * | Project:   ds-laravel-jwttoken-project
- * | File:      HasXToken.php
- * | Created:   05.02.2021
+ * | File:      XToken.php
+ * | Created:   06.02.2021
  * | Todo:
  * |_____________________________________________________________________
  */
 
-namespace DevRaeph\XToken\Traits;
+namespace DevRaeph\XToken\Facades;
 
-use DevRaeph\XToken\Http\Model\DXToken;
+use Illuminate\Support\Facades\Facade;
 
-trait HasXToken
+class TokenizerClaim extends Facade
 {
-    public function XTokens()
+    protected static function getFacadeAccessor()
     {
-        return $this->morphMany(DXToken::class, 'user');
+        return 'tokenizerclaim';
     }
 }

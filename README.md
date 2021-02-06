@@ -15,11 +15,14 @@ you can install it using [Composer](https://getcomposer.org).
 composer require devraeph/laravel-xtoken
 ```
 
-Migrate Database for token table
+Migrate Database for token table 
 ```shell
 php artisan migrate
 ```
-
+Publish Config
+```shell
+php artisan vendor:publish --provider="DevRaeph\XToken\JWTTokenServiceProvider" --tag="config"
+```
 ## Documentation
 
 Model-Trait `HasXToken` <br>
@@ -27,7 +30,7 @@ Example: <br>
 ```php
 
 namespace App\Models;
-use DevStorm\JWTToken\Traits\HasXToken;
+use DevRaeph\XToken\Traits\HasXToken;
 
 class User extends Authenticatable
 {
@@ -39,14 +42,14 @@ class User extends Authenticatable
 
 Issuing a Token:<br>
 ```php
-use DevStorm\JWTToken\Http\Model\JWTToken;
+
+use DevRaeph\XToken\Facades\Tokenizer;
 use Carbon\CarbonImmutable;
 
-$myJWT = (new JWTToken)
-        ->setModel(/* MODEL eg USER */)
+$myJWT = Tokenizer::setModel(/* MODEL eg USER */)
         ->setIssuedBy(/* Default is env("APP_URL") */)
         ->setExpiresAt(CarbonImmutable::now()->addDays(15))
-        ->createToken();
+        ->createToken();      
         
 return $myJWT->toArray(); //Return Token Array
 return $myJWT->toJson();  //Return Token Json
@@ -67,10 +70,9 @@ Route::group(['middleware' => ['api','xToken']], function () {
 Get TokenClaim -> ID of Model
 ```php
 use App\Models\User;
-use DevStorm\JWTToken\Http\Model\JWTTokenClaim;
+use DevRaeph\XToken\Facades\TokenizerClaim;
 
-$myClaim = (new JWTTokenClaim)
-    ->setRequest($request)
+$myClaim = TokenizerClaim::setRequest($request)
     ->get();
     
 $myUser = User::whereId($myClaim)->first();

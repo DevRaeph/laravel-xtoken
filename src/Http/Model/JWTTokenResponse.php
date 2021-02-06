@@ -15,7 +15,7 @@
  * |_____________________________________________________________________
  */
 
-namespace DevStorm\JWTToken\Http\Model;
+namespace DevRaeph\XToken\Http\Model;
 
 
 use Carbon\CarbonImmutable;

@@ -7,27 +7,26 @@
  * ██████╔╝███████╗ ╚████╔╝ ███████║   ██║   ╚██████╔╝██║  ██║██║ ╚═╝ ██║
  * ╚═════╝ ╚══════╝  ╚═══╝  ╚══════╝   ╚═╝    ╚═════╝ ╚═╝  ╚═╝╚═╝     ╚═╝
  * ______________________________________________________________________
- * | Author:    DevStorm Solutions - rplaner
- * | Project:   DS_Laravel_JWTToken
- * | File:      JWTToken.php
- * | Created:   02.12.2020
+ * | Author:    DevStorm Solutions - rplan
+ * | Project:   ds-laravel-jwttoken-project
+ * | File:      XToken.php
+ * | Created:   06.02.2021
  * | Todo:
  * |_____________________________________________________________________
  */
-
-namespace DevStorm\JWTToken\Http\Model;
+namespace DevRaeph\XToken;
 
 use Carbon\Carbon;
 use Carbon\CarbonImmutable;
-use DevStorm\Response\Response;
-use DevStorm\Response\ResponseServiceProvider;
+use DevRaeph\XToken\Http\Model\JWTToken;
+use DevRaeph\XToken\Http\Model\JWTTokenResponse;
+use hisorange\BrowserDetect\Parser as Browser;
 use Illuminate\Database\Eloquent\Model;
 use Lcobucci\JWT\Configuration;
 use Lcobucci\JWT\Signer\Hmac\Sha512;
 use Lcobucci\JWT\Signer\Key\InMemory;
-use hisorange\BrowserDetect\Parser as Browser;
 
-class JWTToken
+class Tokenizer
 {
     private Configuration $config;
     private string $issuedBy;
@@ -41,7 +40,7 @@ class JWTToken
 
     function __construct()
     {
-        $this->issuedBy = env("APP_URL");
+        $this->issuedBy = config('xtoken.tokenIssuedBy');
         $this->permittedFor = $this->issuedBy;
         $this->identifiedBy = uniqid("DS_").Carbon::now()->unix();
         $this->issuedAt = CarbonImmutable::now();
@@ -50,16 +49,16 @@ class JWTToken
 
         $this->config = Configuration::forSymmetricSigner(
             new Sha512(),
-            InMemory::plainText(env("APP_KEY"))
+            InMemory::plainText(config('xtoken.tokenEncKey'))
         );
     }
 
     /**
      * setIssuedBy
-     * @param string $issuedBy Default ist env("APP_URL")
-     * @return JWTToken;
+     * @param string $issuedBy Default ist config("xtoken.tokenIssuedBy")
+     * @return Tokenizer;
      */
-    public function setIssuedBy(string $issuedBy): JWTToken
+    public function setIssuedBy(string $issuedBy): Tokenizer
     {
         $this->issuedBy = $issuedBy;
         return $this;
@@ -68,9 +67,9 @@ class JWTToken
     /**
      * setPermittedFor
      * @param string $permittedFor Route welche freigegeben sein soll. z.B. '<url>/api/v2/'
-     * @return JWTToken;
+     * @return Tokenizer;
      */
-    public function setPermittedFor(string $permittedFor): JWTToken
+    public function setPermittedFor(string $permittedFor): Tokenizer
     {
         $this->permittedFor = $permittedFor;
         return $this;
@@ -79,9 +78,9 @@ class JWTToken
     /**
      * setIdentifiedBy
      * @param string $identifiedBy Unique ID woran der Token unterschieden werden kann.
-     * @return JWTToken;
+     * @return Tokenizer;
      */
-    public function setIdentifiedBy(string $identifiedBy): JWTToken
+    public function setIdentifiedBy(string $identifiedBy): Tokenizer
     {
         $this->identifiedBy = $identifiedBy;
         return $this;
@@ -90,9 +89,9 @@ class JWTToken
     /**
      * setIssuedAt
      * @param CarbonImmutable $issuedAt Default = NOW
-     * @return JWTToken;
+     * @return Tokenizer;
      */
-    public function setIssuedAt(CarbonImmutable $issuedAt): JWTToken
+    public function setIssuedAt(CarbonImmutable $issuedAt): Tokenizer
     {
         $this->issuedAt = $issuedAt;
         return $this;
@@ -101,9 +100,9 @@ class JWTToken
     /**
      * setCanOnlyBeUsedAfter
      * @param CarbonImmutable $canOnlyBeUsedAfter Now plus Time
-     * @return JWTToken;
+     * @return Tokenizer;
      */
-    public function setCanOnlyBeUsedAfter(CarbonImmutable $canOnlyBeUsedAfter): JWTToken
+    public function setCanOnlyBeUsedAfter(CarbonImmutable $canOnlyBeUsedAfter): Tokenizer
     {
         $this->canOnlyBeUsedAfter = $canOnlyBeUsedAfter;
         return $this;
@@ -112,9 +111,9 @@ class JWTToken
     /**
      * setExpiresAt
      * @param CarbonImmutable $expiresAt Now Plus Time
-     * @return JWTToken;
+     * @return Tokenizer;
      */
-    public function setExpiresAt(CarbonImmutable $expiresAt): JWTToken
+    public function setExpiresAt(CarbonImmutable $expiresAt): Tokenizer
     {
         $this->expiresAt = $expiresAt;
         return $this;
@@ -123,9 +122,9 @@ class JWTToken
     /**
      * setModel
      * @param Model $model  Model/Customer or Model/User
-     * @return JWTToken;
+     * @return Tokenizer;
      */
-    public function setModel(Model $model): JWTToken
+    public function setModel(Model $model): Tokenizer
     {
         $this->model = $model;
         return $this;
