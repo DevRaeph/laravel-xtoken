@@ -42,14 +42,18 @@ class VerifyJWTToken
 
         $jwtToken = $request->header('X-DevStorm-Token');
         if($jwtToken == null || $jwtToken == ""){
-            return Response::create("<DevStorm JWT Response> Token wurde nicht mitgegeben!",Response::Failed,"Token is null or empty");
+            return response([
+                "message"=>"Token wurde nicht mitgegeben"
+            ],403);
         }
 
         try {
             $token = $config->parser()->parse((string) $jwtToken);
             assert($token instanceof Plain);
         }catch (\Exception $e){
-            return Response::create("<DevStorm JWT Response> Token muss ein gültiger JWT Token sein!",Response::Failed,$e->getMessage());
+            return response([
+                "message"=>"Token muss ein gültiger JWT Token sein!"
+            ],403);
         }
 
         $constraints = $config->validationConstraints();
@@ -57,7 +61,9 @@ class VerifyJWTToken
         try {
             $config->validator()->assert($token, ...$constraints);
         } catch (RequiredConstraintsViolated $e) {
-            return Response::create("<DevStorm JWT Response> Verifikation fehlgeschlagen!",Response::Failed,$e->getMessage());
+            return response([
+                "message"=>"Verifikation fehlgeschlagen!"
+            ],403);
         }
 
         //Check if identifier is valid in DB
@@ -66,12 +72,12 @@ class VerifyJWTToken
         if(!$dbToken){
             return response([
                 "message"=>"Token nicht im System gefunden!"
-            ],403)->send();
+            ],403);
         }
         if($dbToken->is_banned){
             return response([
                 "message"=>"Token wurde revoked!"
-            ],403)->send();
+            ],403);
         }
 
         return $next($request);

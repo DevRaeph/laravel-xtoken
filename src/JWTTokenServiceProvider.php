@@ -29,6 +29,6 @@ class JWTTokenServiceProvider extends ServiceProvider
         //
         $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
         $router = $this->app->make(Router::class);
-        $router->aliasMiddleware('verifyJwt', VerifyJWTToken::class);
+        $router->aliasMiddleware('xToken', VerifyJWTToken::class);
     }
 }

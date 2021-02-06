@@ -53,8 +53,6 @@ class JWTTokenClaim
 
             $this->uid = $token->claims()->get("uid");
 
-
-
             if($this->uid == null || $this->uid == ""){
                 response([
                     "message"=>"Token Claim ist null oder leer!"
@@ -64,7 +62,10 @@ class JWTTokenClaim
                 return (int)$this->uid;
             }
         }catch (\Exception $e){
-            Response::create("<DevStorm JWT Response> Parse error",Response::Failed,$e->getMessage())->send();
+            response([
+                "message"=>"Parse error!",
+                "error"=>$e->getMessage()
+            ],403)->send();
             die;
         }
     }
