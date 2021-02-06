@@ -1,0 +1,34 @@
+{
+    "name": "devstorm/jwttoken",
+    "description": "This Package creates a JWTToken for the Application and provides a middelware for Auth",
+    "authors": [
+        {
+            "name": "Raphael Planer",
+            "email": "r.planer@devstorm.at"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "lcobucci/jwt": "^4.0",
+        "devstorm/response": "dev-LIVE"
+        
+    },
+    "repositories":[
+        {
+            "type":"vcs",
+            "url":"git@bitbucket.org:devstorm-admin/devstorm-response.git"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [
+                "DevStorm\\JWTToken\\JWTTokenServiceProvider"
+            ]
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "DevStorm\\JWTToken\\": "src/"
+        }
+    }
+}
