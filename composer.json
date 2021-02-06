@@ -1,5 +1,5 @@
 {
-    "name": "devstorm/jwttoken",
+    "name": "devraeph/laravel-xtoken",
     "description": "This Package creates a JWTToken for the Application and provides a middelware for Auth",
     "authors": [
         {
