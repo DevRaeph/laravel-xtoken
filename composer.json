@@ -9,16 +9,8 @@
     ],
     "minimum-stability": "dev",
     "require": {
-        "lcobucci/jwt": "^4.0",
-        "devstorm/response": "dev-LIVE"
-        
+        "lcobucci/jwt": "^4.0"
     },
-    "repositories":[
-        {
-            "type":"vcs",
-            "url":"git@bitbucket.org:devstorm-admin/devstorm-response.git"
-        }
-    ],
     "extra": {
         "laravel": {
             "providers": [
