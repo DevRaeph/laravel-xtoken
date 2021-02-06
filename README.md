@@ -1,7 +1,7 @@
 # DevRaeph / laravel-xtoken
 [![Total Downloads]](https://packagist.org/packages/devraeph/laravel-xtoken)
 [![Latest Stable Version]](https://packagist.org/packages/devraeph/laravel-xtoken)
-[![Unstable Version]](https://packagist.org/packages/devraeph/laravel-xtoken)
+[![Issues]](https://github.com/DevRaeph/laravel-xtoken/issues)
 
 A simple package with which you can issue JWT tokens 
 and also verify them. Usable for multiple models, thanks to existing trait.
@@ -76,6 +76,6 @@ $myClaim = (new JWTTokenClaim)
 $myUser = User::whereId($myClaim)->first();
 ```
 
-[Total Downloads]: https://img.shields.io/packagist/dt/devraeph/laravel-xtoken.svg?style=flat-square
-[Latest Stable Version]: https://img.shields.io/packagist/v/devraeph/laravel-xtoken.svg?style=flat-square
-[Unstable Version]: https://img.shields.io/packagist/vpre/devraeph/laravel-xtoken.svg?style=flat-square
+[Total Downloads]: https://img.shields.io/packagist/dt/devraeph/laravel-xtoken
+[Latest Stable Version]: https://img.shields.io/packagist/v/devraeph/laravel-xtoken
+[Issues]: https://img.shields.io/github/issues/DevRaeph/laravel-xtoken
