@@ -177,7 +177,6 @@ class Tokenizer
                 ],406)->send();
                 die;
             }
-
         }catch (\Exception $e){
             response([
                 "message"=>"Token init fehlgeschlagen!",

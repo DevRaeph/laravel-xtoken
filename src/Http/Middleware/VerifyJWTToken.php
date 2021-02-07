@@ -76,7 +76,7 @@ class VerifyJWTToken
         if($dbToken->is_banned){
             return response([
                 "message"=>"Token wurde revoked!"
-            ],403);
+            ],401);
         }
 
         return $next($request);

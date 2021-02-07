@@ -51,7 +51,7 @@ class TokenizerClaim
             if($this->uid == null || $this->uid == ""){
                 response([
                     "message"=>"Token Claim ist null oder leer!"
-                ],403)->send();
+                ],404)->send();
                 die;
             }else{
                 return (int)$this->uid;
@@ -60,7 +60,7 @@ class TokenizerClaim
             response([
                 "message"=>"Parse error!",
                 "error"=>$e->getMessage()
-            ],403)->send();
+            ],400)->send();
             die;
         }
     }

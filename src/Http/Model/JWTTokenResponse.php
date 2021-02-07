@@ -64,14 +64,14 @@ class JWTTokenResponse
     public function toArray(): array{
         return array(
             "access_token"=>$this->access_token,
-            "token_type"=>"X-DevStorm-Token",
+            "token_type"=>config('xtoken.tokenKey'),
             "expires_in"=>$this->expires_in
         );
     }
     public function toJson(): string{
         return json_encode(array(
             "access_token"=>$this->access_token,
-            "token_type"=>"X-DevStorm-Token",
+            "token_type"=>config('xtoken.tokenKey'),
             "expires_in"=>$this->expires_in
         ));
     }
