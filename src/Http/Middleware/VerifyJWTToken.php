@@ -61,7 +61,8 @@ class VerifyJWTToken
             $config->validator()->assert($token, ...$constraints);
         } catch (RequiredConstraintsViolated $e) {
             return response([
-                "message"=>"Verifikation fehlgeschlagen!"
+                "message"=>"Verifikation fehlgeschlagen!",
+                "exception"=>$e->getMessage(),
             ],403);
         }
 
