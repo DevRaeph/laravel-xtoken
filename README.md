@@ -1,4 +1,4 @@
-<p align="center"><img src="https://postimg.cc/5Yr4q4dJ" alt="Social Card of laravel-xtoken"></p>
+<p align="center"><img src="https://i.postimg.cc/8cp7GcZ7/Unbenannt-1.jpg" alt="Social Card of laravel-xtoken"></p>
 
 # DevRaeph / laravel-xtoken
 [![Total Downloads]](https://packagist.org/packages/devraeph/laravel-xtoken)
