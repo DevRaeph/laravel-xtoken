@@ -1,5 +1,4 @@
-![GitHub Logo](/images/logo.png)
-Format: ![Alt Text](url)
+Format: ![Alt Text](https://i.ibb.co/jzXR8QN/Unbenannt-1.jpg)
 # DevRaeph / laravel-xtoken
 [![Total Downloads]](https://packagist.org/packages/devraeph/laravel-xtoken)
 [![Latest Stable Version]](https://packagist.org/packages/devraeph/laravel-xtoken)
